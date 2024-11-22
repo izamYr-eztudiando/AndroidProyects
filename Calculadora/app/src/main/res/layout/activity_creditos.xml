@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreditosActivity">
+
+    <ImageView
+        android:id="@+id/imgPerfil"
+        android:layout_width="104dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtAutor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chica"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/txtAutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
+        android:text="AUTOR"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/imgPerfil"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="EMAIL"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/txtAutor"
+        app:layout_constraintTop_toBottomOf="@+id/txtAutor"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="CURSO"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/txtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="38dp"
+        android:text="FECHA"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCurso"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="29dp"
+        android:text="VERSION"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFecha"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:backgroundTint="#20E0BE"
+        android:onClick="Atras"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/txtAutorValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:text="ISAMIRA"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtEmailValue"
+        app:layout_constraintStart_toStartOf="@+id/txtEmailValue"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtEmailValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="57dp"
+        android:text="isamira@gmail"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtCurso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtAutor"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtCursoValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="DAM2"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/txtEmailValue"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailValue"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtFechaValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:text="AYER"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/txtCursoValue"
+        app:layout_constraintTop_toBottomOf="@+id/txtCursoValue"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtVersionValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="2.0"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/txtFechaValue"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaValue"
+        tools:ignore="HardcodedText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

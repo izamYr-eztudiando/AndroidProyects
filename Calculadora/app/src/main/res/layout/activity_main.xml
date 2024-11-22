@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="34dp"
+        android:text="Calculadora"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/edNumero1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/edNumero1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="58dp"
+        android:ems="10"
+        android:hint="Introduzca el primer numero"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/edNumero2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtNumero1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        tools:ignore="Autofill,HardcodedText,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+
+    <EditText
+        android:id="@+id/edNumero2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="52dp"
+        android:ems="10"
+        android:hint="Introduzca el segundo numero"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/btnCalcular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtNumero2"
+        app:layout_constraintTop_toBottomOf="@+id/edNumero1"
+        tools:ignore="Autofill,HardcodedText,TextContrastCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+
+    <Button
+        android:id="@+id/btnCalcular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="23dp"
+        android:backgroundTint="#CC1B1B"
+        android:onClick="Calcular"
+        android:text="Calcular"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreditos"
+        app:layout_constraintEnd_toEndOf="@+id/btnCreditos"
+        app:layout_constraintTop_toBottomOf="@+id/edNumero2"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnSalir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="70dp"
+        android:backgroundTint="#060112"
+        android:onClick="Salir"
+        android:text="Salir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btnCreditos"
+        app:layout_constraintTop_toBottomOf="@+id/btnCreditos"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtNumero1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="25dp"
+        android:text="Numero 1º"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edNumero1"
+        app:layout_constraintEnd_toStartOf="@+id/edNumero1"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtNumero2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="25dp"
+        android:text="Numero 2º"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edNumero2"
+        app:layout_constraintEnd_toStartOf="@+id/edNumero2"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnCreditos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#20E0BE"
+        android:onClick="Creditos"
+        android:text="Creditos"
+        app:layout_constraintBottom_toTopOf="@+id/btnSalir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCalcular"
+        tools:ignore="HardcodedText,TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="142dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginBottom="103dp"
+        android:rotationX="32"
+        app:layout_constraintBottom_toTopOf="@+id/edNumero1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/logo"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
