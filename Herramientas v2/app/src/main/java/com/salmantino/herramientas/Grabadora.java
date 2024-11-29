@@ -1,6 +1,7 @@
 package com.salmantino.herramientas;
 
 
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class Grabadora extends Fragment {
@@ -31,18 +33,16 @@ public class Grabadora extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //btn_recorder = (Button) findViewById(R.id.btnGrabadora);
-
-        if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireActivity().getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity().getApplicationContext(), android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.RECORD_AUDIO}, 1000);
         }
 
 
     }
 
-    public void Recorder(View view){
+    public void recorder(View view){
         if (grabacion == null) {
-            archivoSalida = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Grabacion.mp3";
+            archivoSalida = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Grabacion.3gp";
             grabacion = new MediaRecorder();
             grabacion.setAudioSource(MediaRecorder.AudioSource.MIC);
             grabacion.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -57,13 +57,13 @@ public class Grabadora extends Fragment {
             }
 
             btn_recorder.setBackgroundResource(R.drawable.btn_grabar);
-            Toast.makeText(getActivity().getApplicationContext(), "Grabando", Toast.LENGTH_SHORT).show();
-        } else if (grabacion != null) {
+            Toast.makeText(requireActivity().getApplicationContext(), "Grabando", Toast.LENGTH_SHORT).show();
+        } else {
             grabacion.stop();
             grabacion.release();
             grabacion = null;
             btn_recorder.setBackgroundResource(R.drawable.btn_grabar);
-            Toast.makeText(getActivity().getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity().getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -73,17 +73,32 @@ public class Grabadora extends Fragment {
             mediaPlayer.setDataSource(archivoSalida);
             mediaPlayer.prepare();
         } catch (IOException e){
-
+            e.printStackTrace();
         }
 
         mediaPlayer.start();
-        Toast.makeText(getActivity().getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity().getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_SHORT).show();
     }
 
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_grabadora, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflamos el layout del fragmento
+        View viewGrabadora = inflater.inflate(R.layout.fragment_grabadora, container, false);
+
+        // Ahora puedes encontrar el botón usando la vista inflada
+        btn_recorder = viewGrabadora.findViewById(R.id.grabadora);
+
+        // Aquí puedes configurar el botón, por ejemplo, agregar un listener
+
+        btn_recorder.setOnClickListener(view -> {
+            if (grabacion == null) {
+                recorder(view);
+            } else {
+                reproduccion(view);
+            }
+        });
+
+        return viewGrabadora;
     }
 }
