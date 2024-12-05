@@ -6,7 +6,7 @@
     tools:context=".Grabadora">
 
     <ImageView
-        android:id="@+id/btnGrabadora"
+        android:id="@+id/imgGrabadora"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="200dp"
@@ -14,7 +14,7 @@
         android:src="@drawable/btn_grabar" />
 
     <ImageView
-        android:id="@+id/btnReproductora"
+        android:id="@+id/imgReproductora"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginStart="210dp"

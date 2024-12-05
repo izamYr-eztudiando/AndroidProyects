@@ -38,6 +38,10 @@
             style="@style/botones"
             android:src="@drawable/grabadora"/>
 
+        <ImageButton android:id="@+id/ubicacion"
+            style="@style/botones"
+            android:src="@drawable/ubicacion"/>
+
     </LinearLayout>
 
 </RelativeLayout >

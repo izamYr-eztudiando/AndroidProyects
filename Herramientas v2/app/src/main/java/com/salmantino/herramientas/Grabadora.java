@@ -1,4 +1,8 @@
 package com.salmantino.herramientas;
+import android.media.MediaRecorder;
+import android.widget.ImageView;
+
+import androidx.fragment.app.Fragment;
 
 
 import android.annotation.SuppressLint;
@@ -7,10 +11,8 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -20,10 +22,15 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.Objects;
 
 
 public class Grabadora extends Fragment {
+
+    MediaRecorder grabadora = null;
+    String ruta = null;
+    ImageView imgGrabacion = null;
+
+
 
     private MediaRecorder grabacion;
     private String archivoSalida = null;
@@ -32,14 +39,10 @@ public class Grabadora extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (ContextCompat.checkSelfPermission(requireActivity().getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity().getApplicationContext(), android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.RECORD_AUDIO}, 1000);
-        }
-
+        
 
     }
-
+/*
     public void recorder(View view){
         if (grabacion == null) {
             archivoSalida = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Grabacion.3gp";
@@ -53,7 +56,7 @@ public class Grabadora extends Fragment {
                 grabacion.prepare();
                 grabacion.start();
             } catch (IOException e) {
-
+                e.getSuppressed();
             }
 
             btn_recorder.setBackgroundResource(R.drawable.btn_grabar);
@@ -79,10 +82,14 @@ public class Grabadora extends Fragment {
         mediaPlayer.start();
         Toast.makeText(requireActivity().getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_SHORT).show();
     }
-
+*/
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        if (ContextCompat.checkSelfPermission(requireActivity().getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity().getApplicationContext(), android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.RECORD_AUDIO}, 1000);
+        }
         // Inflamos el layout del fragmento
         View viewGrabadora = inflater.inflate(R.layout.fragment_grabadora, container, false);
 
@@ -91,14 +98,14 @@ public class Grabadora extends Fragment {
 
         // Aquí puedes configurar el botón, por ejemplo, agregar un listener
 
-        btn_recorder.setOnClickListener(view -> {
+      /*  btn_recorder.setOnClickListener(view -> {
             if (grabacion == null) {
                 recorder(view);
             } else {
                 reproduccion(view);
             }
         });
-
+*/
         return viewGrabadora;
     }
 }
