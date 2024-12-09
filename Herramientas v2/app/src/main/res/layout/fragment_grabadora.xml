@@ -5,21 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".Grabadora">
 
-    <ImageView
-        android:id="@+id/imgGrabadora"
+    <Button
+        android:id="@+id/btnGrabadora"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:onClick="recorder"
-        android:src="@drawable/btn_grabar" />
+        android:background="@drawable/btn_grabar" />
 
-    <ImageView
-        android:id="@+id/imgReproductora"
+    <Button
+        android:id="@+id/btnReproductora"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginStart="210dp"
+        android:layout_toRightOf="@+id/btnGrabadora"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="200dp"
-        android:onClick="reproduccion"
-        android:src="@drawable/btn_reproducir" />
+        android:background="@drawable/btn_reproducir" />
 
 </RelativeLayout>
