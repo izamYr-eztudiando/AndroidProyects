@@ -24,43 +24,48 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 public class Ubicacion extends Fragment {
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private TextView locationTv;
-    private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
+    private FusedLocationProviderClient fusedLocationProviderClient; // Clase para acceder a la ubicación del dispositivo cliente
+    private TextView locationTv; //Para mostrar la ubicación del dispositivo
+    private static final int REQUEST_CODE_LOCATION_PERMISSION = 1; // Constante para identificar la solicitud de permisos de ubicación
+    // Tiene el valor 1, porque es un código de solicitud único, es un identificador y no da conflicto.
     private Button btnUbicacion;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        // Inicializamos el objeto utilizando el contexto de la actividad
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity()); 
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission") // Anotación para suprimir advertencias sobre permisos de ubicación
     private void getCurrentLocation() {
+        // Verificar si se concedieron los permisos de ubicación, sino, se solicita al usuario que los permita
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_LOCATION_PERMISSION);
             return;
         }
 
+        // Creamos el objeto LocationRequest que define como solicitar la ubicación, estableciendo prioridad a la alta precisión
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(10000); // Intervalo de actualización en milisegundos
         locationRequest.setFastestInterval(5000); // Intervalo más rápido en milisegundos
 
+        // Se solicita actualizaciones de ubicación, por ello el objeto fused... se actualiza
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, new LocationCallback() {
             @Override
-            public void onLocationResult(@NonNull LocationResult locationResult) {
+            public void onLocationResult(@NonNull LocationResult locationResult) { // LocationResult clase API de Google Play Services que encapsula los resultados de una solicitud de actualizaciones de ubicación.
                 if (locationResult == null) {
                     return;
                 }
-                for (Location location : locationResult.getLocations()) {
+                for (Location location : locationResult.getLocations()) { // getLocation devuelve la lista de objetos Location que representan las ubicaciones obtenidas
                     if (location != null) {
                         locationTv.setText("Latitud: " + location.getLatitude() + "\n" + "Longitud: " + location.getLongitude());
                     }
                 }
             }
-        }, Looper.getMainLooper());
+        }, Looper.getMainLooper()); // Looper es una clase que permite que un hilo ejecute un bucle de mensajes, y este método lo que hace es obtener el Looper del main (hilo principal) necesario para ejecutar código con la interfaz
 
 //        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
 //            if (location != null) {
@@ -71,11 +76,15 @@ public class Ubicacion extends Fragment {
 //        });
     }
 
+
+    // Este método se llama cuando el usuario responde a la solicitud de permisos. Si da los permisos se llama
+    // al método getCurrentLocation(), sino, se muestra un mensaje de advertencia
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_LOCATION_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { //array de los resultados de la solicitud de permisos, 
+                //si hay más de 0 indica que el usuario respondió al menos a una solicitud. Y encima si esa respuesta (la posicion[0]) es concedida se llama al método getCurrentLocation()
                 getCurrentLocation();
             } else {
                 Toast.makeText(getContext(), "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show();
