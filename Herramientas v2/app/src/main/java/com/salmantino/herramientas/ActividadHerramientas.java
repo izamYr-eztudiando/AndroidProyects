@@ -39,7 +39,7 @@ public class ActividadHerramientas extends AppCompatActivity
         setContentView(R.layout.activity_actividad_herramientas);
         // PASO 1 - Añadir nuevo fragmento
 
-        misFragmentos = new Fragment[6];
+        misFragmentos = new Fragment[8];
         misFragmentos[0] = new Linterna();
         misFragmentos[1] = new Musica();
         misFragmentos[2] = new Nivel();
@@ -49,6 +49,8 @@ public class ActividadHerramientas extends AppCompatActivity
         }
         // Grabar y reproducir audio
         misFragmentos[5] = new Grabadora();
+        misFragmentos[6] = new Ubicacion();
+        misFragmentos[7] = new Camara();
 
         //CAMBIO 2 -  creamos la instancia de nuestro helper
         dbHelper = new EventoDbHelper(this);

@@ -15,11 +15,11 @@ import android.widget.ImageButton;
 public class Menu extends Fragment {
 
     //vamos a crear un array de los botones (linterna, altavoz, giroscopio)
-    private final int[] BOTONESMENU={R.id.linterna, R.id.musica, R.id.nivel, R.id.vibracion, R.id.imgHuella, R.id.grabadora, R.id.ubicacion};
+    private final int[] BOTONESMENU={R.id.linterna, R.id.musica, R.id.nivel, R.id.vibracion, R.id.imgHuella, R.id.grabadora, R.id.ubicacion, R.id.camara};
 
     //array que almacena los botones iluminados
     private final int[] BOTONESILUMINADOS = {R.drawable.linterna2, R.drawable.musica2,
-            R.drawable.nivel2, R.drawable.vibracion_on, R.drawable.huella_off, R.drawable.grabadora, R.drawable.ubicacion};
+            R.drawable.nivel2, R.drawable.vibracion_on, R.drawable.huella_off, R.drawable.grabadora, R.drawable.ubicacion, R.drawable.camara};
 
     //variable que viajará desde las activdades hasta aquí para saber que botón se pulsó
     private int boton;
