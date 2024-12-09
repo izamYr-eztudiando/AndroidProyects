@@ -27,19 +27,14 @@ import java.io.IOException;
 
 public class Grabadora extends Fragment {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-    private MediaRecorder grabadora = null;
-    private String archivoSalida = null;
+    private MediaRecorder grabadora = null; // objeto para la grabación de audio
+    private String archivoSalida = null; // Ruta de salida del audio
     private Button btn_recorder;
-    private MediaPlayer mediaPlayer;
-    private String[] permissions = {
+    private MediaPlayer mediaPlayer; // objeto para la reproducción de audio
+    private String[] permissions = { // Array de permisos para acceder a la grabación y reproducción del audio
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-
-
-//    private MediaRecorder grabacion;
-//    private String archivoSalida = null;
-//    private Button btn_recorder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,16 +42,19 @@ public class Grabadora extends Fragment {
     }
 
     public void iniciarGrabacion() {
+        // Se pone la ruta definitiva a la variable
         archivoSalida = requireActivity().getExternalFilesDir(null).getAbsolutePath() + "/Grabacion.3gp";
         //archivoSalida = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Grabacion.3gp";
-        grabadora = new MediaRecorder();
+        grabadora = new MediaRecorder(); // Se crea el objeto y se configura todo antes de grabar
         grabadora.setAudioSource(MediaRecorder.AudioSource.MIC);
         grabadora.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         grabadora.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         grabadora.setOutputFile(archivoSalida);
 
         try {
+            // Se prepara la grabadora
             grabadora.prepare();
+            // Empieza
             grabadora.start();
             btn_recorder.setBackgroundResource(R.drawable.btn_grabar); // Cambia el icono a detener
             Toast.makeText(requireActivity().getApplicationContext(), "Grabando", Toast.LENGTH_SHORT).show();
@@ -67,8 +65,11 @@ public class Grabadora extends Fragment {
     }
 
     private void detenerGrabacion() {
+        // Si la grabadora no está nula
         if (grabadora != null) {
+            // Se para
             grabadora.stop();
+            // Se libera la grabadora del audio
             grabadora.release();
             grabadora = null;
             btn_recorder.setBackgroundResource(R.drawable.btn_grabar); // Cambia el icono a grabar
@@ -77,14 +78,18 @@ public class Grabadora extends Fragment {
     }
 
     private void reproducirAudio() {
+        // Esto si ya tenía un audio anterior guardado
         if (mediaPlayer != null) {
             mediaPlayer.release(); // Libera el MediaPlayer
         }
-
+        // Creamos el objeto para la reproduccion del audio
         mediaPlayer = new MediaPlayer();
         try {
+            // Metemos el archivoSalida que sería el audio grabado en la reproductora
             mediaPlayer.setDataSource(archivoSalida);
+            // La preparamos
             mediaPlayer.prepare();
+            // Y empezamos a reproducir el audio
             mediaPlayer.start();
             Toast.makeText(requireActivity().getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
@@ -97,7 +102,7 @@ public class Grabadora extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted, request it
+            // Si el permiso no esta concedido, lo solicita
             requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO_PERMISSION);
         }
 
@@ -120,6 +125,7 @@ public class Grabadora extends Fragment {
         return viewGrabadora;
     }
 
+    // Libera los recursos del MediaRecorder y MediaPlayer cuando el fragmento se destruye
     @Override
     public void onDestroy() {
         super.onDestroy();
